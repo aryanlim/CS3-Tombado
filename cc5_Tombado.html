@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coding Challenge 5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: lightseagreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modified FLAMES</h1>
+
+    <label for="name1">Name 1:</label>
+    <input type="text" id="name1" placeholder="Enter name 1">
+    <label for="name2">Name 2:</label>
+    <input type="text" id="name2" placeholder="Enter name 2">
+    <button onclick="flames()">Match Names</button>
+
+    <h4>FLAMES Result:</h4>
+    <h3 id="result"></h3>
+
+    <script>
+        function flames() {
+            var name1 = document.getElementById("name1").value.toLowerCase().replace(/[^a-z]/g, "");
+            var name2 = document.getElementById("name2").value.toLowerCase().replace(/[^a-z]/g, "");
+            
+            var flames = "flames";
+            var count = name1.length + name2.length;
+            
+            for (var i = 0; i < name1.length; i++) {
+                for (var j = 0; j < name2.length; j++) {
+                    if (name1[i] === name2[j]) {
+                        count -= 2;
+                        name2 = name2.slice(0, j) + name2.slice(j + 1);
+                        break;
+                    }
+                }
+            }
+            
+            var resultIndex = count % flames.length;
+            var resultText = "";
+            
+            switch (flames[resultIndex]) {
+                case "f":
+                    resultText = "Friendship";
+                    break;
+                case "l":
+                    resultText = "Love";
+                    break;
+                case "a":
+                    resultText = "Affection";
+                    break;
+                case "m":
+                    resultText = "Marriage";
+                    break;
+                case "e":
+                    resultText = "Enmity";
+                    break;
+                case "s":
+                    resultText = "Siblings";
+                    break;
+            }
+            
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
